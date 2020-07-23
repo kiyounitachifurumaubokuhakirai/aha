@@ -41,7 +41,7 @@
             </div>
 
             <div class="form-group row">
-            <div class="col-sm-3">
+              <div class="col-sm-3">
                 <button type="cancel" class="btn btn-secondary">キャンセルし、トップページへ</button>
               </div>
               <div class="col-sm-3">

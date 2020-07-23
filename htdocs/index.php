@@ -58,7 +58,7 @@
                     <div class="card-body">
                         <h5 class="card-title">初級問題</h5>
                         <p class="card-text">画像のどこが変化したかわかりやすくなっています。初めての方にオススメ</p>
-                        <a href="#" class="btn btn-primary">問題へ</a>
+                        <a href="aha/aha.php" class="btn btn-primary">問題へ</a>
                     </div>
                 </div>
                 <!-- 中級問題 -->
@@ -67,7 +67,7 @@
                     <div class="card-body">
                         <h5 class="card-title">中級問題</h5>
                         <p class="card-text">標準レベル。</p>
-                        <a href="#" class="btn btn-primary">問題へ</a>
+                        <a href="aha/aha.php" class="btn btn-primary">問題へ</a>
                     </div>
                 </div>
                 <!-- 上級問題 -->
@@ -76,7 +76,7 @@
                     <div class="card-body">
                         <h5 class="card-title">上級問題</h5>
                         <p class="card-text">これを解けた貴方はスゴイ！</p>
-                        <a href="#" class="btn btn-primary">問題へ</a>
+                        <a href="aha/aha.php" class="btn btn-primary">問題へ</a>
                     </div>
                 </div>
             </div>
