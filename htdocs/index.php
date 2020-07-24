@@ -42,7 +42,7 @@
                 <a class="nav-link" href="sign_up/sign_up.php">sign up</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">管理者ページ</a>
+                <a class="nav-link" href="admin/register.php">管理者ページ</a>
             </li>
         </ul>
     
