@@ -38,9 +38,9 @@
         </div>
         <!-- aha画像 -->
         <div id="img-wrapper">
-            <img id="targetImage" class="before" src="mage/easy/aha1/aha1.png" alt="">
-            <img class="after" src="image/easy/aha1/aha1_after.png" alt="">
-            <img class="answer" src="mage/easy/aha1/aha1_answer.png" alt="">
+            <img id="targetImage" class="before" src="../img/easy/aha1/aha1.png" alt="">
+            <img class="after" src="../img/easy/aha1/aha1_after.png" alt="">
+            <img class="answer" src="../img/easy/aha1/aha1_answer.png" alt="">
         </div>
         <!-- progress -->
         <div class="progress" class="container my-3">
