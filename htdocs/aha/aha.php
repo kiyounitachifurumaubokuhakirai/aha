@@ -22,6 +22,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
+
     <div class="container my-5">
         <div class="tick" data-value="1234"　data-did-init="setupFlip">
             <div data-repeat="true">
@@ -33,8 +34,8 @@
             <div id="countDown"></div>
         </div>
         <!-- start button -->
-        <div class="btn-wrapper"></div>
-            <button type="button" id="btnStart" class="btn btn-primary btn-lg btn-block">START</button>
+        <div class="btn-wrapper">
+            <button type="button" id="btnStart" class="btn btn-primary">START</button>
         </div>
         <!-- aha画像 -->
         <div id="img-wrapper">
@@ -46,6 +47,19 @@
         <div class="progress" class="container my-3">
             <div id="progressBar" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
+    </div>
+    <div class="container">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="../index.php">TOPページへ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">確認する（答え合わせ）</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">次の問題へ</a>
+            </li>
+        </ul>
     </div>
 
 
