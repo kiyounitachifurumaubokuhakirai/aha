@@ -41,10 +41,10 @@ $(function() {
         $.when(
             $('#btnStart').hide(),
             $('#countDown').hide(100),
-            $('.after').removeClass('active'),
             $('.before').css('transition',''),
             // $('.before').css('visibility','visible'),
             $('.before').addClass('active'),
+            $('.after').removeClass('active'),
             $('.before').css('opacity', 1),
             $('.progress').css('visibility','visible'),
             // $('.progress').css('display', 'block'),
@@ -114,7 +114,6 @@ $(function() {
         $('#btnStart').prop('disable', true);
         $('#btnStart').show(100);
         $('#btnStart').text('answer');
-
         $('#countDown').hide(100);
         $('.progress').css('visibility','hidden');
         $('.after').removeClass('active');
