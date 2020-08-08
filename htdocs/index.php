@@ -1,5 +1,6 @@
-<php?
-
+<?php
+  session_start();
+  session_regenerate_id(TRUE);
 ?>
 
 
@@ -24,7 +25,11 @@
         <!-- jumbotron -->
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h2 class="display-5">ようこそ！</h2>
+                <?PHP if( isset($_SESSION["signIn"]['is_signIn']) ):?>
+                    <h2 class="display-5">ようこそ！ <?= $_SESSION["signIn"]['name'] ?>さん</h2>
+                <?PHP else:?>
+                    <h2 class="display-5">ようこそ！</h2>
+                <?PHP endif?>
                 <p class="lead">このサイトではアハ体験ができます</p>
                 <p class="lead">アハ体験とは、一定時間で画像の一部が徐々に変化していくので、それを当てるゲームです</p>
             </div>
