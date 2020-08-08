@@ -18,12 +18,12 @@
 
 
 
-    /** LoginCheck
+    /** sign in Check
      * @param string $name
      * @param string $non_hash_pass
      * @return int 
      */
-    public function LoginCheck($name, $non_hash_pass) : int {
+    public function signInCheck($name, $non_hash_pass) : int {
 
       $hash_pass = password_hash($non_hash_pass, PASSWORD_DEFAULT);
 
@@ -112,26 +112,24 @@
      * @param string $hash_pass
      * @return bool false → 登録なし、true → 登録済み
      */
-    public function isPlayer ($player_name, $hash_pass) : bool{
+    public function isPlayer ($player_name, $hash_pass) : bool
+    {
       $sql = 'SELECT password FROM players_list WHERE is_deleted=0 AND player=?';
       $stmt = $this->dbh->prepare($sql);
       $data = [];
       $data = $player_name;
 
-      $result = [];
-      while(TRUE){
+      while (TRUE)
+      {
         $rec = [];
         $rec = $stmt->fetch(PDO::FETCH_ASSOC);
         if($rec == FALSE) break;
-        $result[] = $rec;
+        if(password_verify($hash_pass, $rec['password'])) {
+          unset ($_SESSION['err']['isPlayer']);
+          $_SESSION['err']["signUp"]['accident'] = "既に使用されています";
+          return true;
+        }
       }
-
-      if(password_verify($hash_pass, $rec['password'])) {
-        unset ($_SESSION['err']['register']);
-        $_SESSION['err']['register'] = "既に使用されています";
-        return true;
-      }
-
       return false;
     }
 
