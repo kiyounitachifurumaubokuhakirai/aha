@@ -1,7 +1,7 @@
 <?php
     /** Database接続関連 */
     define('DB_HOST', 'localhost');
-    define('DB_NAME', 'Booklist');
+    define('DB_NAME', 'AHA');
     define('DB_USER', 'root');
     //define('DB_PASS', '');   //for windows
     define('DB_PASS', 'root');   //for mac
