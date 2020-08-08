@@ -1,5 +1,6 @@
 <?PHP
-
+  session_start();
+  session_regenerate_id(TRUE);
 ?>
 
 <!DOCTYPE html>
@@ -19,22 +20,36 @@
     <!-- Form -->
     <div class="container">
         <div class="my-5">
-        <h2>Sign In</h2>
-            <form method="POST" action="#">
+            <h2>Sign In</h2>
+            <form method="POST">
                 <div class="form-group">
                     <label for="name">氏名またはニックネーム</label>
-                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
+                    <?php if(isset($_SESSION['err']['signIn']['name'])):?>
+                        <input type="text" class="form-control fix-rounded-right" required id="name" name="name" placeholder="<?=$_SESSION['signIn']['name']?>">
+                        <div class="invalid-feedback">
+                            <?= $_SESSION['err']['signIn']['name'] ?>
+                        </div>
+                    <?php else:?>
+                        <input type="text" class="form-control" id="user" name="name">
+                    <?php endif?>
                 </div>
                 <div class="form-group">
                     <label for="password">パスワード</label>
-                    <input type="password" class="form-control" id="password">
+                    <?php if(isset($_SESSION['err']['signIn']['pass'])):?>
+                        <input type="password" class="form-control rounded-right" required id="password" name="pass">
+                        <div class="invalid-feedback">
+                            <?= $_SESSION['err']['signIn']['pass'] ?>
+                        </div>
+                    <?PHP else:?>
+                        <input type="password" class="form-control" id="password" name="pass">
+                    <?PHP endif?>
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
-                <button type="cancel" class="btn btn-secondary">cancel</button>
-                <button type="submit" class="btn btn-primary">sign in</button>
+                <button type="cancel" class="btn btn-secondary" formaction="../index.php">cancel</button>
+                <button type="submit" class="btn btn-primary" formaction="sign_in_check.php">sign in</button>
             </form>
         </div>
     </div>
