@@ -44,10 +44,10 @@
         <a class="nav-link" href="#">TOP</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="sign_in/sign_in.php">sign in</a>
+        <a class="nav-link" href="../sign_in/sign_in.php">sign in</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="sign_up/sign_up.php">sign up</a>
+        <a class="nav-link active" href="sign_up.php">sign up</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="admin/register.php">管理者ページ</a>
