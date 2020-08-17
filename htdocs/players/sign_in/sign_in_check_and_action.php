@@ -2,8 +2,8 @@
   session_start();
   session_regenerate_id(TRUE);
 
-  require_once('../common/define.php');
-  require_once('../common/sql_players.php');
+  require_once('../../common/define.php');
+  require_once('../../common/sql_players.php');
 
   //$_SESSION リセット
   if (isset($_SESSION['err']) && $_SESSION['err'])  unset($_SESSION['err']);
@@ -27,6 +27,10 @@
   {
     $validity = FALSE;
     $_SESSION['err']['signIn']['pass'] = 'パスワードが入力されていません';
+  }  elseif (!preg_match('/^[a-zA-Z0-9]{8,16}+$/', $_SESSION['signIn']['pass']))
+  {
+    $validity = false;
+    $_SESSION['err']['signIn']['pass'] = 'パスワードが間違っています';
   }
 
   if ($validity == FALSE)
@@ -35,27 +39,31 @@
     exit();
   }
 
-
+/** sing in
+ * 
+ */
   try
   {
     $player = new playersModel();
     $signIn = $player->signInCheck($_SESSION["signIn"]['name'], $_SESSION["signIn"]['pass']);
-    if ($signIn)
+    if ($signIn != 0)
     {
-      $_SESSION["signIn"]['is_signIn'] = $signIn;
-      header('Location: ../index.php');
-    } else
-    {
+      
       $_SESSION['err']['login']['incorrect'] = 'ユーザー名とパスワードが一致しません';
       header('Location: sign_in.php');
     }
   } catch(Exception $e)
   {
     var_dump($e);
-    header('Location: ../index.php');
     exit();
+    header('Location: ../../index.php');
+
   }
 
   $player = NULL;
 
+  unset($_SESSION["err"]);
+  
+  $_SESSION["signIn"]['is_signIn'] = $signIn;
+  header('Location: ../../index.php');
 ?>

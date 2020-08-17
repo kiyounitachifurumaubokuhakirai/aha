@@ -2,8 +2,8 @@
   session_start();
   session_regenerate_id(TRUE);
 
-  require_once('../common/define.php');
-  require_once('../common/sql_players.php');
+  require_once('../../common/define.php');
+  require_once('../../common/sql_players.php');
 
   //$_SESSION リセット
   if (isset($_SESSION['err']))  unset($_SESSION['err']);

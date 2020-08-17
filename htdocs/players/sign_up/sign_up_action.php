@@ -2,13 +2,13 @@
   session_start();
   session_regenerate_id(TRUE);
 
-  require_once('../common/define.php');
-  require_once('../common/sql_players.php');
+  require_once('../../common/define.php');
+  require_once('../../common/sql_players.php');
 
   try
   {
     $player = new playersModel();
-    if ( $player->registerPlayer($_SESSION["signUp"]['name'], $_SESSION["signUp"]['pass1']) == false )
+    if ( $player->registerPlayer ($_SESSION["signUp"]['name'], $_SESSION["signUp"]['pass1']) == false )
     {
       header('Location: sign_up.php');
     }
@@ -16,19 +16,20 @@
   {
     var_dump($e);
     exit();
-    header('Location: ../index.php');
+    header('Location: ../../index.php');
   }
 
   $player = NULL;
 
   unset($_SESSION["signUp"]);
+  unset($_SESSION["err"]);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sign up</title>
+    <title>管理者 sign up</title>
 
     <!-- CSSを読み込む -->
     <link rel="stylesheet" href="stylesheet.css">
@@ -41,16 +42,13 @@
   <!-- nav -->
   <ul class="nav justify-content-end">
     <li class="nav-item">
-        <a class="nav-link" href="#">TOP</a>
+        <a class="nav-link" href="../../index.php">TOP</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="../sign_in/sign_in.php">sign in</a>
+        <a class="nav-link" href="../players_page.php">playerページ</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="sign_up.php">sign up</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="admin/register.php">管理者ページ</a>
+        <a class="nav-link" href="../../admin/register.php">管理者ページ</a>
     </li>
   </ul>
 
