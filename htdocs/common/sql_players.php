@@ -24,19 +24,15 @@
      * @return int 
      */
     public function signInCheck($name, $non_hash_pass) : int {
-
-      $hash_pass = password_hash($non_hash_pass, PASSWORD_DEFAULT);
-
-      $sql = 'SELECT password FROM players_list WHERE is_deleted=0 AND player=?';
+      $sql = 'SELECT ID, password FROM players_list WHERE is_deleted=0 AND player=?';
       $stmt = $this->dbh->prepare($sql);
       $data = [];
       $data[] = $name;
-      $data[] = $hash_pass;
       $stmt->execute($data);
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
       //認証処理
-      if(password_verify($hash_pass, $rec['password']))  return $rec['id'];
+      if(password_verify($non_hash_pass, $rec['password']))  return $rec['ID'];
 
       return 0;
     }
@@ -76,7 +72,7 @@
       //登録者がいるか
       $hash_pass = password_hash($non_hash_pass, PASSWORD_DEFAULT);
 
-      if ($this->isPlayer($player_name, $hash_pass) == true) return false; //
+      if ($this->isPlayer($player_name, $hash_pass) == true) return false;
 
       //登録作業
       $sql = 'UPDATE players_list set player=?, password=? WHERE is_deleted=0 AND id=?';
@@ -114,17 +110,19 @@
      */
     public function isPlayer ($player_name, $hash_pass) : bool
     {
-      $sql = 'SELECT password FROM players_list WHERE is_deleted=0 AND player=?';
+      $sql = 'SELECT ID FROM players_list WHERE is_deleted=0 AND (player=? OR password=?)';
       $stmt = $this->dbh->prepare($sql);
       $data = [];
       $data = $player_name;
+      $data = $hash_pass;
 
       while (TRUE)
       {
         $rec = [];
         $rec = $stmt->fetch(PDO::FETCH_ASSOC);
         if($rec == FALSE) break;
-        if(password_verify($hash_pass, $rec['password'])) {
+        else
+        {
           unset ($_SESSION['err']['isPlayer']);
           $_SESSION['err']["signUp"]['accident'] = "既に使用されています";
           return true;
