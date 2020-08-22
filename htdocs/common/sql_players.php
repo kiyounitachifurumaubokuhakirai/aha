@@ -91,7 +91,7 @@
     /** player削除  (is_deleted=1 とする)
      * @param int $player_id
      */
-    public function is_deleted ($player_id) : void {
+    public function deletePlayer ($player_id) : void {
       $sql = 'UPDATE players_list set is_deleted=1 WHERE is_deleted=0 AND ID=?';
       $stmt = $this->dbh->prepare($sql);
       $data = [];
@@ -131,6 +131,31 @@
       return false;
     }
 
+
+
+
+    /**全player(is_deleted=0のみ)を取得
+     * 
+     */
+    public function getAllPlayers () {
+      $players = [];
+
+      //テーブル名とカラム名には「別名」をつけることができる。(toto_itemsには「i」という別名をつけて、usersには「u」という別名をつけている)
+      //sqlは必要最小限で出力する
+      $sql = 'SELECT ID, player FROM players_list where is_deleted=0 order by player';
+      $stmt = $this->dbh->prepare($sql);
+      $stmt->execute();
+
+      while (TRUE)
+      {
+        $rec = [];
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rec == FALSE) break;
+        $players[] = $rec;
+      }
+
+      return $players;
+    }
 
   }
 ?>
