@@ -21,6 +21,12 @@
     <div class="container">
         <div class="my-5">
             <h2>Sign In</h2>
+            
+            <!-- sign in 失敗のエラーメッセージ -->
+            <?PHP if (isset($_SESSION['err']['login']['incorrect']) && $_SESSION['err']['login']['incorrect']):?>
+                <h3 class="alert alert-primary" role="alert"><?=$_SESSION['err']['login']['incorrect']?></h3>
+            <?PHP endif?>
+
             <form method="POST" action="#">
                 <div class="form-group row">
                 <!-- 氏名またはニックネーム -->
