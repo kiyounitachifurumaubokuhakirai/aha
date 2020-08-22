@@ -46,7 +46,7 @@
   {
     $player = new playersModel();
     $signIn = $player->signInCheck($_SESSION["signIn"]['name'], $_SESSION["signIn"]['pass']);
-    if ($signIn != 0)
+    if ($signIn == 0)
     {
       
       $_SESSION['err']['login']['incorrect'] = 'ユーザー名とパスワードが一致しません';
