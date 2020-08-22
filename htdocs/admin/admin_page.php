@@ -63,7 +63,7 @@
   <?PHP if (isset($_SESSION['admin']["signIn"]['is_signIn']) && ($_SESSION['admin']["signIn"]['is_signIn'] != 0)):?>
     <div class="container mt-3">
       <h2>playerの削除</h2>
-      <a href="admin_players/delete.php">こちら</a>から
+      <a href="admin_players/players.php">こちら</a>から
     </div>
   <?PHP endif?>
 
