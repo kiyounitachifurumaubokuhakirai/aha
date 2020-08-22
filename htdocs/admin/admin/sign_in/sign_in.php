@@ -27,20 +27,20 @@
                     <label for="name" class="col-sm-3 col-form-label">氏名またはニックネーム</label>
                     <div class="col-sm-9">
                         <!-- 『氏名またはニックネーム』が空白の時 -->
-                        <?php if(isset($_SESSION['err']['signIn']['name'])):?>  
+                        <?php if(isset($_SESSION['err']['amdin']['signIn']['name'])):?>  
                             <input type="text" class="form-control is-invalid fix-rounded-right" required id="name" name="name">
                             <div class="invalid-feedback">
-                                <?= $_SESSION['err']['signIn']['name'] ?>
+                                <?= $_SESSION['err']['amdin']['signIn']['name'] ?>
                             </div>
                         <!-- 『sign in』に失敗した時 -->
-                        <?php elseif(isset($_SESSION['err']['login']['incorrect'] )):?>
+                        <?php elseif(isset($_SESSION['err']['amdin']['login']['incorrect'] )):?>
                             <input type="text" class="form-control is-invalid fix-rounded-right" required id="name" name="name">
                             <div class="invalid-feedback">
-                                <?= $_SESSION['err']['login']['incorrect']  ?>
+                                <?= $_SESSION['err']['amdin']['login']['incorrect']  ?>
                             </div>
                         <!-- 『パスワード』が間違っていた時 -->
-                        <?PHP elseif (isset($_SESSION['signIn']['name'])):?>
-                            <input type="text" class="form-control" id="user" name="name" aria-describedby="name" required value=<?=$_SESSION['signIn']['name']?>>
+                        <?PHP elseif (isset($_SESSION['amdin']['signIn']['name'])):?>
+                            <input type="text" class="form-control" id="user" name="name" aria-describedby="name" required value=<?=$_SESSION['amdin']['signIn']['name']?>>
                         <!-- 初回 -->
                         <?php else:?>
                             <input type="text" class="form-control" id="user" name="name" aria-describedby="name" required>
@@ -52,16 +52,16 @@
                     <label for="pass" class="col-sm-3 col-form-label">パスワード</label>
                     <div class="col-sm-9">
                         <!-- パスワードが空白か文字数が間違っている -->
-                        <?PHP if(isset($_SESSION['err']['signIn']['pass'])): ?>
+                        <?PHP if(isset($_SESSION['err']['amdin']['signIn']['pass'])): ?>
                             <input type="password" class="form-control is-invalid fix-rounded-right" required id="pass" name="pass">
                             <div class="invalid-feedback">
-                                <?PHP echo $_SESSION['err']['signIn']['pass'] ?>
+                                <?PHP echo $_SESSION['err']['amdin']['signIn']['pass'] ?>
                             </div>
                         <!-- 『sign in』に失敗した時 -->
-                        <?php elseif(isset($_SESSION['err']['login']['incorrect'] )):?>
+                        <?php elseif(isset($_SESSION['err']['amdin']['login']['incorrect'] )):?>
                             <input type="password" class="form-control is-invalid fix-rounded-right" required id="pass" name="pass">
                             <div class="invalid-feedback">
-                                <?= $_SESSION['err']['login']['incorrect']  ?>
+                                <?= $_SESSION['err']['amdin']['login']['incorrect']  ?>
                             </div>
                         <?PHP else:?>
                             <input type="password" class="form-control" id="pass" name="pass">
