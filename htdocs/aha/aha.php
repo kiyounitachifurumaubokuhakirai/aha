@@ -1,7 +1,3 @@
-<?PHP
-
-?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
