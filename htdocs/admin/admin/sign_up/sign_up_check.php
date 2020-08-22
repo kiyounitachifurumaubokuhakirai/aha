@@ -7,9 +7,9 @@
 
   //$_SESSION リセット
   if (isset($_SESSION['err']))  unset($_SESSION['err']);
-  if (isset($_SESSION['signUp']))  unset($_SESSION['signUp']);
+  if (isset($_SESSION['amdin']))  unset($_SESSION['amdin']);
 
-  $_SESSION['signUp'] = sanitize($_POST);
+  $_SESSION['amdin']['signUp'] = sanitize($_POST);
 
   /** validity check
    * 氏名またはニックネーム
@@ -17,24 +17,24 @@
    */
   $validity = TRUE;
   // 氏名またはニックネーム
-  if (!isset($_SESSION['signUp']['name']) || ($_SESSION['signUp']['name']==""))
+  if (!isset($_SESSION['amdin']['signUp']['name']) || ($_SESSION['amdin']['signUp']['name']==""))
   {
     $validity = FALSE;
-    $_SESSION['err']['signUp']['name'] = '氏名またはニックネームが入力されていません';
-  } elseif (ctype_space($_SESSION['signUp']['name']) == true)
+    $_SESSION['err']['amdin']['signUp']['name'] = '氏名またはニックネームが入力されていません';
+  } elseif (ctype_space($_SESSION['amdin']['signUp']['name']) == true)
   {
     $validity = FALSE;
-    $_SESSION['err']['signUp']['name'] = '空白文字は使えません';
+    $_SESSION['err']['amdin']['signUp']['name'] = '空白文字は使えません';
   }
   // パスワード
-  if ($_SESSION['signUp']['pass1'] != $_SESSION['signUp']['pass2'])
+  if ($_SESSION['amdin']['signUp']['pass1'] != $_SESSION['amdin']['signUp']['pass2'])
   {
     $validity = FALSE;
-    $_SESSION['err']['signUp']['pass'] = 'パスワードが一致しません';
-  }  elseif (!preg_match('/^[a-zA-Z0-9]{8,16}+$/', $_SESSION['signUp']['pass1']))
+    $_SESSION['err']['amdin']['signUp']['pass'] = 'パスワードが一致しません';
+  }  elseif (!preg_match('/^[a-zA-Z0-9]{8,16}+$/', $_SESSION['amdin']['signUp']['pass1']))
   {
     $validity = false;
-    $_SESSION['err']['signUp']['pass'] = '半角英数8文字以上16文字以内で設定して下さい';
+    $_SESSION['err']['amdin']['signUp']['pass'] = '半角英数8文字以上16文字以内で設定して下さい';
   }
 
   if ($validity == FALSE)
@@ -69,7 +69,7 @@
       <div class="form-group row">
         <label for="name" class="col-sm-3 col-form-label">氏名またはニックネーム</label>
         <div class="col-sm-9">
-          <input type="text" readonly class="form-control" id="user" value="<?=$_SESSION['signUp']['name']?>">
+          <input type="text" readonly class="form-control" id="user" value="<?=$_SESSION['amdin']['signUp']['name']?>">
         </div>
       </div>
       <!-- パスワード -->
