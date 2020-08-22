@@ -4,7 +4,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sign up</title>
@@ -20,7 +20,7 @@
   <!-- jumbotron -->
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <?PHP if( isset($_SESSION["signIn"]['is_signIn']) ):?>
+      <?PHP if( isset($_SESSION["signIn"]['is_signIn'])):?>
         <h2 class="display-5">ようこそ！ <?= $_SESSION["signIn"]['name'] ?>さん</h2>
       <?PHP else:?>
         <h2 class="display-5">ようこそ！</h2>
@@ -42,31 +42,35 @@
     </li>
 </ul>
 
-  <div class="container mt-3">
-    <h2>Sign In</h2>
-    <a href="sign_in/sign_in.php">こちら</a>から
-  </div>
+  <?PHP if( !isset($_SESSION["signIn"]['is_signIn']) ):?>
+    <div class="container mt-3">
+      <h2>Sign In</h2>
+      <a href="sign_in/sign_in.php">こちら</a>から
+    </div>
+  <?PHP endif?>
 
-  <?PHP if (isset($_SESSION["signIn"]['is_signIn']) && ($_SESSION["signIn"]['is_signIn'] != 0)):?>
+  <?PHP if (isset($_SESSION["signIn"]['is_signIn'])):?>
     <div class="container mt-3">
       <h2>Sign Out</h2>
       <a href="sign_out/sign_out.php">こちら</a>から
     </div>
   <?PHP endif?>
 
-  <div class="container mt-3">
-    <h2>Sign Up</h2>
-    <a href="sign_up/sign_up.php">こちら</a>から
-  </div>
+  <?PHP if ( !isset($_SESSION["signIn"]['is_signIn'])):?>
+    <div class="container mt-3">
+      <h2>Sign Up</h2>
+      <a href="sign_up/sign_up.php">こちら</a>から
+    </div>
+  <?PHP endif?>
 
-  <?PHP if (isset($_SESSION["signIn"]['is_signIn']) && ($_SESSION["signIn"]['is_signIn'] != 0)):?>
+  <?PHP if (isset($_SESSION["signIn"]['is_signIn']) ):?>
     <div class="container mt-3">
       <h2>player名やパスワードの変更</h2>
       <a href="change/change.php">こちら</a>から
     </div>
   <?PHP endif?>
 
-  <?PHP if (isset($_SESSION["signIn"]['is_signIn']) && ($_SESSION["signIn"]['is_signIn'] != 0)):?>
+  <?PHP if (isset($_SESSION["signIn"]['is_signIn']) ):?>
     <div class="container mt-3">
       <h2>退会</h2>
       <a href="withdraw/withdraw.php">こちら</a>から
