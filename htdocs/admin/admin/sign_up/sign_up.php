@@ -20,21 +20,21 @@
   <div class="container mt-5">
     <form action="#" method="POST" novalidate>
       <h2>管理者 sign up</h2>
-      <?PHP if (isset($_SESSION['err']["signUp"]['accident'])): ?>
-        <p color="red"><?=$_SESSION['err']["signUp"]['accident']?></p>
+      <?PHP if (isset($_SESSION['err']['amdin']["signUp"]['accident'])): ?>
+        <p color="red"><?=$_SESSION['err']['amdin']["signUp"]['accident']?></p>
       <?PHP endif?>
       <div class="container mt-4">
         <!-- 氏名またはニックネーム -->
         <div class="form-group row">
           <label for="name" class="col-sm-3 col-form-label">氏名またはニックネーム</label>
           <div class="col-sm-9">
-            <?php if(isset($_SESSION['err']['signUp']['name'])):?>
+            <?php if(isset($_SESSION['err']['amdin']['signUp']['name'])):?>
               <input type="text" class="form-control is-invalid fix-rounded-right" required id="name" name="name">
               <div class="invalid-feedback">
-                  <?= $_SESSION['err']['signUp']['name'] ?>
+                  <?= $_SESSION['err']['amdin']['signUp']['name'] ?>
               </div>
-            <?PHP elseif (isset($_SESSION['signUp']['name'])):?>
-              <input type="text" class="form-control" id="user" name="name" aria-describedby="name" required value=<?=$_SESSION['signUp']['name']?>>
+            <?PHP elseif (isset($_SESSION['amdin']['signUp']['name'])):?>
+              <input type="text" class="form-control" id="user" name="name" aria-describedby="name" required value=<?=$_SESSION['amdin']['signUp']['name']?>>
             <?php else:?>
               <input type="text" class="form-control" id="user" name="name" aria-describedby="name" required>
             <?php endif?>
@@ -44,10 +44,10 @@
         <div class="form-group row">
           <label for="pass1" class="col-sm-3 col-form-label">パスワード</label>
           <div class="col-sm-9">
-            <?PHP if(isset($_SESSION['err']['signUp']['pass'])): ?>
+            <?PHP if(isset($_SESSION['err']['amdin']['signUp']['pass'])): ?>
               <input type="password" class="form-control is-invalid fix-rounded-right" required id="pass1" name="pass1">
               <div class="invalid-feedback">
-                <?PHP echo $_SESSION['err']['signUp']['pass'] ?>
+                <?PHP echo $_SESSION['err']['amdin']['signUp']['pass'] ?>
               </div>
             <?PHP else:?>
               <input type="password" class="form-control" id="pass1" name="pass1" aria-describedby="passwordHelpBlock">
@@ -61,10 +61,10 @@
         <div class="form-group row">
           <label for="pass2" class="col-sm-3 col-form-label">パスワード（再入力）</label>
           <div class="col-sm-9">
-            <?PHP if(isset($_SESSION['err']['signUp']['pass'])): ?>
+            <?PHP if(isset($_SESSION['err']['amdin']['signUp']['pass'])): ?>
               <input type="password" class="form-control is-invalid fix-rounded-right" required id="pass2" name="pass2">
               <div class="invalid-feedback">
-                <?= $_SESSION['err']['signUp']['pass'] ?>
+                <?= $_SESSION['err']['amdin']['signUp']['pass'] ?>
               </div>
             <?PHP else:?>
               <input type="password" class="form-control" id="Password2" name="pass2" aria-describedby="passwordHelpBlock">

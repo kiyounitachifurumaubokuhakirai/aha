@@ -8,7 +8,7 @@
   try
   {
     $admin = new adminModel();
-    if ( $admin->registerAdmin($_SESSION["signUp"]['name'], $_SESSION["signUp"]['pass1']) == false )
+    if ( $admin->registerAdmin($_SESSION['amdin']["signUp"]['name'], $_SESSION['amdin']["signUp"]['pass1']) == false )
     {
       header('Location: sign_up.php');
     }
@@ -21,7 +21,7 @@
 
   $admin = NULL;
 
-  unset($_SESSION["signUp"]);
+  unset($_SESSION['amdin']["signUp"]);
   unset($_SESSION["err"]);
 ?>
 
