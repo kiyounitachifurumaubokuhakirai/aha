@@ -6,8 +6,8 @@
   require_once('../../../common/sql_admin.php');
 
   //$_SESSION リセット
-  if (isset($_SESSION['err']) && $_SESSION['err'])  unset($_SESSION['err']);
-  if (isset($_SESSION['signIn']) && $_SESSION['signIn'])  unset($_SESSION['signIn']);
+  if (isset($_SESSION['err']))  unset($_SESSION['err']);
+  if (isset($_SESSION['amdin']))  unset($_SESSION['amdin']);
 
   $_SESSION['admin']['signIn'] = sanitize($_POST);
 
@@ -20,17 +20,17 @@
   if (!$_SESSION['admin']['signIn']['name'])
   {
     $validity = FALSE;
-    $_SESSION['err']['signIn']['name'] = '氏名またはニックネームが入力されていません';
+    $_SESSION['err']['amdin']['signIn']['name'] = '氏名またはニックネームが入力されていません';
   }
 
   if (!$_SESSION['admin']['signIn']['pass'])
   {
     $validity = FALSE;
-    $_SESSION['err']['signIn']['pass'] = 'パスワードが入力されていません';
+    $_SESSION['err']['amdin']['signIn']['pass'] = 'パスワードが入力されていません';
   }  elseif (!preg_match('/^[a-zA-Z0-9]{8,16}+$/', $_SESSION['admin']['signIn']['pass']))
   {
     $validity = false;
-    $_SESSION['err']['signIn']['pass'] = 'パスワードが間違っています';
+    $_SESSION['err']['amdin']['signIn']['pass'] = 'パスワードが間違っています';
   }
 
   if ($validity == FALSE)
