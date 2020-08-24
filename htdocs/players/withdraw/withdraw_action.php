@@ -13,7 +13,7 @@
   {
     $player = new playersModel();
     $player -> deletePlayer($_SESSION['withdraw']['ID']);
-  } catch(Exception $e)
+  } catch (Exception $e)
   {
     var_dump($e);
     exit();
