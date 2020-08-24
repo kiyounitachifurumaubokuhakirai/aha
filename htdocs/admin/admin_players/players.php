@@ -71,6 +71,7 @@
                     <td>
                         <form action="../../players/withdraw/withdraw.php" method="post">
                             <input type="hidden" name="ID" value="<?= $player['ID']?>">
+                            <input type="hidden" name="name" value="<?=$player['player']?>">
                             <input type="submit" value="削除">
                         </form>
                     </td>
