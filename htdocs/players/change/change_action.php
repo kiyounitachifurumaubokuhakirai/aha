@@ -21,13 +21,43 @@
     header('Location: ../../index.php');
   }
 
+  unset($_SESSION["signIn"]['name']);
+  $_SESSION["signIn"]['name'] = $POST['name'];
+
+  unset($_SESSION["signIn"]['pass']);
+  $_SESSION["signIn"]['pass'] = $POST['pass'];
+
+  unset($_SESSION["err"]);
+
+  header('Location: ../sign_in/sign_in_check_and_action.php');
+
+  /** sing in
+ * 
+ */
+  try
+  {
+    $signIn = $player->signInCheck($_SESSION["signIn"]['name'], $_SESSION["signIn"]['pass']);
+    if ($signIn == 0)
+    {
+      $_SESSION['err']['login']['incorrect'] = 'ユーザー名とパスワードが一致しません';
+      header('Location: sign_in.php');
+    }
+  } catch(Exception $e)
+  {
+    var_dump($e);
+    exit();
+    header('Location: ../../index.php');
+  }
   $player = NULL;
 
-  unset($_SESSION["signUp"]);
+  if(isset($_SESSION["err"])) unset($_SESSION["err"]);
+
+  $_SESSION["signIn"]['is_signIn'] = $signIn;
+  header('Location: ../../index.php');
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sign up</title>
