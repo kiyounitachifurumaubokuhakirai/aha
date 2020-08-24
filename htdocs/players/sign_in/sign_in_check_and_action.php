@@ -62,7 +62,7 @@
 
   $player = NULL;
 
-  unset($_SESSION["err"]);
+  if(isset($_SESSION["err"])) unset($_SESSION["err"]);
   
   $_SESSION["signIn"]['is_signIn'] = $signIn;
   header('Location: ../../index.php');

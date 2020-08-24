@@ -62,8 +62,8 @@
 
   $player = NULL;
 
-  unset($_SESSION["err"]);
   unset($_SESSION['admin']['signIn']['pass']);
+  if(isset($_SESSION["err"])) unset($_SESSION["err"]);
   
   $_SESSION['admin']["signIn"]['is_signIn'] = $signIn;
   header('Location: ../../admin_page.php');
