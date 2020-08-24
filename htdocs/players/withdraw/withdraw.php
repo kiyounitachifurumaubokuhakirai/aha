@@ -9,13 +9,13 @@
   if (isset($_SESSION['err']))  unset($_SESSION['err']);
   if (isset($_SESSION['withdraw']))  unset($_SESSION['withdraw']);
 
-  
-  if (isset($_POST))
+  if (isset($_POST) && $_POST)
   {
     $_SESSION['withdraw'] = sanitize($_POST);
-  } elseif (isset($_SESSION["signIn"]['is_signIn']))
+  } elseif (isset($_SESSION["signIn"]['is_signIn']) && ($_SESSION["signIn"]['is_signIn'] != 0))
   {
-    $_SESSION['withdraw']['ID'] = $_SESSION["signIn"]['is_signIn'];
+      $_SESSION['withdraw']['ID'] = $_SESSION["signIn"]['is_signIn'];
+      $_SESSION['withdraw']['name'] = $_SESSION["signIn"]['name'];
   } else
   {
     header('Location: withdraw_err.php');
@@ -24,14 +24,7 @@
   /** validity check
    * ID
    */
-  $validity = true;
-    // ID
     if (!$_SESSION['withdraw']['ID'] || $_SESSION['withdraw']['ID'] == 0 )
-    {
-        $validity = false;
-    }
-
-    if ($validity == FALSE)
     {
         header('Location: withdraw_err.php');
         exit();
@@ -72,13 +65,31 @@
 
     <!-- main -->
     <div class="container">
+        <p>退会確認</p>
         <form action="#" method="POST">
             <div class="container mt-4">
                 <!-- 氏名またはニックネーム -->
                 <div class="form-group row">
                     <label for="name" class="col-sm-3 col-form-label">氏名またはニックネーム</label>
                     <div class="col-sm-9">
-                        <input type="text" readonly class="form-control" id="user" value="<?=$_SESSION['signUp']['name']?>">
+                        <input type="text" readonly class="form-control" id="user" value="<?=$_SESSION['withdraw']['name']?>">
+                    </div>
+                </div>
+                <!-- ボタン -->
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <button type="cancel" class="btn btn-secondary"
+                            <?PHP if(isset($_POST) && $_POST):?>
+                                formaction="../../admin/admin_players/players.php"
+                            <?PHP elseif(isset($_SESSION["signIn"]['is_signIn']) && ($_SESSION["signIn"]['is_signIn'] != 0)):?>
+                                formaction="../players_page.php"
+                            <?PHP else:?>
+                                formaction="../../admin/admin_players/players.php"
+                            <?PHP endif?>
+                        >キャンセルし、トップページへ</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-primary" formaction="withdraw_action.php">退会</button>
                     </div>
                 </div>
             </div>
