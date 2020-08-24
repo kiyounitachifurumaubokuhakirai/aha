@@ -1,6 +1,20 @@
 <?PHP
   session_start();
   session_regenerate_id(TRUE);
+
+  require_once('../../../common/define.php');
+  require_once('../../../common/sql_questions.php');
+
+  try{
+    $question = new questionsModel();
+    $question -> registerQuestion($_SESSION['question']['title'], $_SESSION['question']['difficulty'], 
+        $_SESSION['question']['before'], $_SESSION['question']['after'], $_SESSION['question']['answer'], $_SESSION['question']['explanation']);
+  } catch (Exception $e)
+  {
+    var_dump($e);
+    exit();
+    header('Location: ../../index.php');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +22,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin</title>
+    <title>問題登録</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
  <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -19,75 +33,27 @@
     <!-- jumbotron -->
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h2 class="display-5">問題作成</h2>
-            <p class="lead">このページの項目を登録すると問題が作成できます</p>
+            <h3 class="display-5">問題を登録しました</h3>
         </div>
     </div>
 
     <!-- nav -->
     <div class="mt-3">
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link" href="../../../index.php">TOP</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../../../players/players_page.php">playerページ</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="../../admin_page.php">管理者ページ</a>
-        </li>
-    </ul>
-</div>
-
-
-<!-- FORM -->
-    <div class="container my-5">
-    <form action="#" method="POST" enctype="multipart/form-data">
-        <div class="form-group row">
-            <!-- 難易度 -->
-            <label for="difficulty" class="col-sm-4 col-form-label">難易度</label>
-            <div class="col-sm-5">
-                <select class="form-control" id="difficulty">
-                    <option value=1>easy</option>
-                    <option value=2>normal</option>
-                    <option value=3>hard</option>
-                </select>
-            </div>
-        </div> 
-        <!-- 画像の登録 -->
-        <div class="form-group row">
-            <label for="before" class="col-sm-4 col-form-label">変更前の画像 <span class="badge badge-warning">画像サイズ：980×600 pngファイル</span></label>
-            <div class="col-sm-6">
-                <input type="file" class="form-control-file" id="before">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="after" class="col-sm-4 col-form-label">変更後の画像 <span class="badge badge-warning">画像サイズ：980×600 pngファイル</span></label>
-            <div class="col-sm-6">
-                <input type="file" class="form-control-file" id="after">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="answer" class="col-sm-4 col-form-label">答えの画像 <span class="badge badge-warning">画像サイズ：980×600 pngファイル</span></label>
-            <div class="col-sm-6">
-                <input type="file" class="form-control-file" id="answer">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="explanation" class="col-sm-4 col-form-label">答えの解説 <span class="badge badge-warning">100文字まで</span></label>
-            <div class="col-sm-6">
-                <textarea class="form-control" id="explanation" row="5"></textarea>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-3">
-                <button type="cancel" class="btn btn-secondary" formaction="../question_page.php">破棄して問題管理画面へ</button>
-            </div>
-            <div class="col-sm-2">
-                <button type="submit" class="btn btn-primary" formaction="register_check.php">登録（確認）</button>
-            </div>
-        </form>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="../../../index.php">TOP</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../../../players/players_page.php">playerページ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="../../admin_page.php">管理者ページ</a>
+            </li>
+        </ul>
     </div>
-    
+    <div class="container my5">
+        <h3>問題を登録しました</h3>
+    </div>
+
 </body>
 </html>

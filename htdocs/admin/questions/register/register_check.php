@@ -2,9 +2,6 @@
     session_start();
     session_regenerate_id(TRUE);
 
-    require_once('../../../common/define.php');
-    require_once('../../../common/sql_questions.php');
-
     //$_SESSION リセット
     if (isset($_SESSION['err']) && $_SESSION['err'])  unset($_SESSION['err']);
     if (isset($_SESSION['question']) && $_SESSION['question'])  unset($_SESSION['question']);
@@ -71,7 +68,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin</title>
+    <title>問題登録（確認）</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
  <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -81,7 +78,7 @@
 <body>
 
     <div class="container">
-        <h2 class="display-5">問題作成（確認）</h2>
+        <h2 class="display-5">問題登録（確認）</h2>
     </div>
 
 
@@ -93,44 +90,43 @@
             <!-- 難易度 -->
             <label for="difficulty" class="col-sm-4 col-form-label">難易度</label>
             <div class="col-sm-5">
-                <select class="form-control" id="difficulty">
-                    <option value=1>easy</option>
-                    <option value=2>normal</option>
-                    <option value=3>hard</option>
-                </select>
+                <input type="text" readonly <?PHP if($_SESSION['question']['difficty']==1):?>   value="easy"
+                                            <?PHP elseif($_SESSION['question']['difficty']==2):?>   value="normal"
+                                            <?PHP elseif($_SESSION['question']['difficty']==3):?>   value="hard"
+                                            <?PHP endif?>>
             </div>
         </div> 
         <!-- 画像の登録 -->
         <div class="form-group row">
-            <label for="before" class="col-sm-4 col-form-label">変更前の画像 <span class="badge badge-warning">画像サイズ：980×600 pngファイル</span></label>
+            <label for="before" class="col-sm-4 col-form-label">変更前の画像</label>
             <div class="col-sm-6">
-                <input type="file" class="form-control-file" id="before">
+                <input type="text" id="before" value="<?=$_SESSION['question']['before']?>">
             </div>
         </div>
         <div class="form-group row">
-            <label for="after" class="col-sm-4 col-form-label">変更後の画像 <span class="badge badge-warning">画像サイズ：980×600 pngファイル</span></label>
+            <label for="after" class="col-sm-4 col-form-label">変更後の画像</label>
             <div class="col-sm-6">
-                <input type="file" class="form-control-file" id="after">
+                <input type="text" id="after" value="<?=$_SESSION['question']['after']?>">
             </div>
         </div>
         <div class="form-group row">
-            <label for="answer" class="col-sm-4 col-form-label">答えの画像 <span class="badge badge-warning">画像サイズ：980×600 pngファイル</span></label>
+            <label for="answer" class="col-sm-4 col-form-label">答えの画像</label>
             <div class="col-sm-6">
-                <input type="file" class="form-control-file" id="answer">
+                <input type="text" id="answer" value="<?=$_SESSION['question']['answer']?>">
             </div>
         </div>
         <div class="form-group row">
-            <label for="explanation" class="col-sm-4 col-form-label">答えの解説 <span class="badge badge-warning">100文字まで</span></label>
+            <label for="explanation" class="col-sm-4 col-form-label">答えの解説</label>
             <div class="col-sm-6">
-                <textarea class="form-control" id="explanation" row="5"></textarea>
+                <textarea class="form-control" id="explanation" row="5"><?=$_SESSION['question']['explanation']?></textarea>
             </div>
         </div>
         <div class="form-group row">
             <div class="col-sm-3">
-                <button type="cancel" class="btn btn-secondary" formaction="../question_page.php">破棄して問題管理画面へ</button>
+                <button type="cancel" class="btn btn-secondary" formaction="register.php">戻る</button>
             </div>
             <div class="col-sm-2">
-                <button type="submit" class="btn btn-primary" formaction="register_check.php">登録（確認）</button>
+                <button type="submit" class="btn btn-primary" formaction="register_action.php">登録</button>
             </div>
         </form>
     </div>
