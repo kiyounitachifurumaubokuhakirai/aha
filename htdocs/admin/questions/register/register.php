@@ -28,13 +28,13 @@
     <div class="mt-3">
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link" href="../index.php">TOP</a>
+            <a class="nav-link" href="../../../index.php">TOP</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../players/players_page.php">playerページ</a>
+            <a class="nav-link" href="../../../players/players_page.php">playerページ</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="#">管理者ページ</a>
+            <a class="nav-link active" href="../../admin_page.php">管理者ページ</a>
         </li>
     </ul>
 </div>

@@ -79,7 +79,7 @@
         <a class="nav-link" href="../players_page.php">playerページ</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="../../admin/register.php">管理者ページ</a>
+        <a class="nav-link" href="../../admin/admin_page.php">管理者ページ</a>
     </li>
   </ul>
 

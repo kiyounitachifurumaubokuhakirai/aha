@@ -43,13 +43,13 @@
     <!-- nav -->
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link" href="../index.php">TOP</a>
+            <a class="nav-link" href="../../index.php">TOP</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../players/players_page.php">playerの管理ページ</a>
+            <a class="nav-link" href="../players_page.php">playerの管理ページ</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../admin_page.php">管理者ページ</a>
+            <a class="nav-link" href="../../admin/admin_page.php">管理者ページ</a>
         </li>
     </ul>
     
