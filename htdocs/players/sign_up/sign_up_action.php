@@ -21,8 +21,37 @@
 
   $player = NULL;
 
-  unset($_SESSION["signUp"]);
-  unset($_SESSION["err"]);
+  if (isset($_SESSION["signIn"]['name'])) unset($_SESSION["signIn"]['name']);
+  $_SESSION["signIn"]['name'] = $_SESSION["signUp"]['name'];
+  if (isset($_SESSION["signIn"]['pass'])) unset($_SESSION["signIn"]['pass']);
+  $_SESSION["signIn"]['pass'] = $_SESSION["signUp"]['pass1'];
+
+/** sing in
+ * 
+ */
+try
+{
+  $player = new playersModel();
+  $signIn = $player->signInCheck($_SESSION["signIn"]['name'], $_SESSION["signIn"]['pass']);
+  if ($signIn == 0)
+  {
+    
+    $_SESSION['err']['login']['incorrect'] = 'ユーザー名とパスワードが一致しません';
+    header('Location: sign_in.php');
+  }
+} catch(Exception $e)
+{
+  var_dump($e);
+  exit();
+  header('Location: ../../index.php');
+}
+
+$player = NULL;
+
+if(isset($_SESSION["err"])) unset($_SESSION["err"]);
+
+$_SESSION["signIn"]['is_signIn'] = $signIn;
+header('Location: ../../index.php');
 ?>
 
 <!DOCTYPE html>
