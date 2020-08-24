@@ -43,13 +43,8 @@
   </div>
 
   <div class="container mt-3">
-    <h2>問題修正</h2>
-    <a href="edit/edit.php">こちら</a>から
-  </div>
-
-  <div class="container mt-3">
-    <h2>問題削除</h2>
-    <a href="delete/delete.php">こちら</a>から
+    <h2>問題修正・削除</h2>
+    <a href="delete_and_edit.php">こちら</a>から
   </div>
 
 
