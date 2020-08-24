@@ -9,9 +9,18 @@
   if (isset($_SESSION['err']))  unset($_SESSION['err']);
   if (isset($_SESSION['signUp']))  unset($_SESSION['signUp']);
 
-  $player = new playersModel();
-  $players = [];
-  $players = $player -> getAllPlayers();
+  try
+  {
+    $player = new playersModel();
+    $players = [];
+    $players = $player -> getAllPlayers();
+  } catch (Exception $e)
+  {
+    var_dump($e);
+    exit();
+    header('Location: ../../index.php');
+  }
+
 ?>
 
 
