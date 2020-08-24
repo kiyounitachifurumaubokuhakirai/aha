@@ -4,7 +4,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sign up</title>
@@ -33,20 +33,21 @@
   <!-- nav -->
   <ul class="nav justify-content-end">
     <li class="nav-item">
-        <a class="nav-link" href="../index.php">TOP</a>
+        <a class="nav-link" href="../../index.php">TOP</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="../players/players_page.php">playerの管理ページ</a>
+        <a class="nav-link active" href="../../players/players_page.php">playerの管理ページ</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#">管理者ページ</a>
     </li>
 </ul>
-
-  <div class="container mt-3">
-    <h2> 管理者用 Sign In</h2>
-    <a href="admin/sign_in/sign_in.php">こちら</a>から
-  </div>
+  <?PHP if (!isset($_SESSION['admin']["signIn"]['is_signIn'])):?>
+    <div class="container mt-3">
+      <h2> 管理者用 Sign In</h2>
+      <a href="admin/sign_in/sign_in.php">こちら</a>から
+    </div>
+  <?PHP endif?>
 
   <?PHP if (isset($_SESSION['admin']["signIn"]['is_signIn']) && ($_SESSION['admin']["signIn"]['is_signIn'] != 0)):?>
     <div class="container mt-3">
@@ -55,10 +56,12 @@
     </div>
   <?PHP endif?>
 
-  <div class="container mt-3">
-    <h2>管理者用 Sign Up</h2>
-    <a href="admin/sign_up/sign_up.php">こちら</a>から
-  </div>
+  <?PHP if (!isset($_SESSION['admin']["signIn"]['is_signIn'])):?>
+    <div class="container mt-3">
+      <h2>管理者用 Sign Up</h2>
+      <a href="admin/sign_up/sign_up.php">こちら</a>から
+    </div>
+  <?PHP endif?>
 
   <?PHP if (isset($_SESSION['admin']["signIn"]['is_signIn']) && ($_SESSION['admin']["signIn"]['is_signIn'] != 0)):?>
     <div class="container mt-3">
