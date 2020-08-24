@@ -22,7 +22,7 @@
   $admin = NULL;
 
   unset($_SESSION['amdin']["signUp"]);
-  unset($_SESSION["err"]);
+  if(isset($_SESSION["err"])) unset($_SESSION["err"]);
 ?>
 
 <!DOCTYPE html>
