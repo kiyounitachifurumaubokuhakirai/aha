@@ -60,7 +60,10 @@
                     <div class="card-body">
                         <h5 class="card-title">初級問題</h5>
                         <p class="card-text">画像のどこが変化したかわかりやすくなっています。初めての方にオススメ</p>
-                        <a href="aha/aha.php" class="btn btn-primary">問題へ</a>
+                        <form action="#" method="POST">
+                            <input type="hidden" name="difficulty" value=1>
+                            <button type="submit" class="btn btn-primary" formaction="aha/aha_list.php">問題へ</button>
+                        </form>
                     </div>
                 </div>
                 <!-- 中級問題 -->
@@ -69,7 +72,10 @@
                     <div class="card-body">
                         <h5 class="card-title">中級問題</h5>
                         <p class="card-text">標準レベル。</p>
-                        <a href="aha/aha.php" class="btn btn-primary">問題へ</a>
+                        <form action="#" method="POST">
+                            <input type="hidden" name="difficulty" value=2>
+                            <button type="submit" class="btn btn-primary" formaction="aha/aha_list.php">問題へ</button>
+                        </form>
                     </div>
                 </div>
                 <!-- 上級問題 -->
@@ -78,7 +84,10 @@
                     <div class="card-body">
                         <h5 class="card-title">上級問題</h5>
                         <p class="card-text">これを解けた貴方はスゴイ！</p>
-                        <a href="aha/aha.php" class="btn btn-primary">問題へ</a>
+                        <form action="#" method="POST">
+                            <input type="hidden" name="difficulty" value=3>
+                            <button type="submit" class="btn btn-primary" formaction="aha/aha_list.php">問題へ</button>
+                        </form>
                     </div>
                 </div>
             </div>
