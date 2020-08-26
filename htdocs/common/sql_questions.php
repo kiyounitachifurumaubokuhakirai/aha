@@ -1,5 +1,6 @@
 <?php
   require_once('sql_parent.php');
+  require_once('sql_compList.php');
 
   class questionsModel extends BaseModel {
 
@@ -53,6 +54,79 @@
       $stmt->execute();
 
       $questions = [];
+      while (TRUE)
+      {
+        $rec = [];
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rec == FALSE) break;
+        $questions[] = $rec;
+      }
+
+      return $questions;
+    }
+
+
+
+
+    /** ある難易度の全問題を取得
+     * @param int difficulty
+     * @return  array questions
+     */
+    public function getAllQuestionsForDicculty($difficulty) {
+      $sql = 'SELECT id, title FROM questions_list WHERE (is_deleted=0 AND difficulty=?)';
+      $stmt = $this->dbh->prepare($sql);
+      $data = [];
+      $data[] = $difficulty;
+      $stmt->execute();
+
+      $questions = [];
+      while (TRUE)
+      {
+        $rec = [];
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rec == FALSE) break;
+        $questions[] = $rec;
+      }
+
+      return $questions;
+    }
+
+
+
+
+    /** ある難易度の全問題を取得
+     * @param int player_ID
+     * @param int difficulty
+     * @return  array questions
+     */
+    public function getAllQuestionsForDiccultyInSignin($player_ID, $difficulty) {
+      $questions = [];
+      $sql = 'SELECT q.id, q.title c.players_ID FROM questions_list q
+               left OUTER JOIN comp_questions_list c ON q.id = c.questions_ID
+               WHERE q.is_deleted=0 AND q.difficulty=? AND players_ID!=?
+               ORDER BY q.title';
+      $stmt = $this->dbh->prepare($sql);
+      $data = [];
+      $data[] = $difficulty;
+      $data[] = $player_ID;
+      $stmt->execute();
+
+      $questions = [];
+      while (TRUE)
+      {
+        $rec = [];
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rec == FALSE) break;
+        $questions[] = $rec;
+      }
+
+      $sql = 'SELECT q.id, q.title c.players_ID FROM questions_list q
+               left OUTER JOIN comp_questions_list c ON q.id = c.questions_ID
+               WHERE q.is_deleted=0 AND q.difficulty=? AND players_ID=?
+               ORDER BY q.title';
+      $stmt = $this->dbh->prepare($sql);
+      $stmt->execute();
+
       while (TRUE)
       {
         $rec = [];
