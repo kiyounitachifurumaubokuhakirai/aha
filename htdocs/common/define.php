@@ -24,4 +24,19 @@
         return $after;
     }
 
+
+
+
+    function count_file($path)
+    {
+        $files = scandir($path);
+        $count = 0;
+        foreach ($files as $file){
+        if (is_file($path . $file) == true){
+        $count++;
+        }
+        }
+        return ($count);
+    }
+
 ?>
