@@ -2,12 +2,16 @@
     session_start();
     session_regenerate_id(TRUE);
 
+    require_once('../../../common/define.php');
+    require_once('../../../common/sql_questions.php');
+
     //$_SESSION リセット
     if (isset($_SESSION['err']) && $_SESSION['err'])  unset($_SESSION['err']);
     if (isset($_SESSION['question']) && $_SESSION['question'])  unset($_SESSION['question']);
 
     $_SESSION['question'] = sanitize($_POST);
 
+// exit();
     /** validity check
      * タイトル
      * 画像×3枚
@@ -24,24 +28,28 @@
         $validity = FALSE;
         $_SESSION['err']['question']['title'] = '空白文字は使えません';
     }
+
     // 画像（変化前）
-    if (!isset($_SESSION['question']['before']) || ($_SESSION['question']['before'] == ""))
+    if( questionsModel::uploadFileToTemp($_FILES['before'], "before.png") == false )    //static functionを呼び出す場合は、class名::ユーザ定義関数　とする
     {
+        $_SESSION['err']['question']['before'] =  "ファイルをアップロードできません。";
         $validity = FALSE;
-        $_SESSION['err']['question']['before'] = '画像が設定されていません';
-    }
+    } 
+
     // 画像（変化後）
-    if (!isset($_SESSION['question']['after']) || ($_SESSION['question']['after'] == ""))
+    if( questionsModel::uploadFileToTemp($_FILES['after'], "after.png") == false )  //static functionを呼び出す場合は、class名::ユーザ定義関数　とする
     {
+        // $_SESSION['err']['question']['after'] =  "ファイルをアップロードできません。";
         $validity = FALSE;
-        $_SESSION['err']['question']['after'] = '画像が設定されていません';
     }
+
     // 画像（答え）
-    if (!isset($_SESSION['question']['answer']) || ($_SESSION['question']['answer'] == ""))
+    if( questionsModel::uploadFileToTemp($_FILES['answer'], "answer.png") == false )    //static functionを呼び出す場合は、class名::ユーザ定義関数　とする
     {
+        $_SESSION['err']['question']['answer'] =  "ファイルをアップロードできません。";
         $validity = FALSE;
-        $_SESSION['err']['question']['answer'] = '画像が設定されていません';
     }
+
     // 答えの補足解説
     if (ctype_space($_SESSION['question']['explanation']) == true)
     {
@@ -52,7 +60,6 @@
         $validity = FALSE;
         $_SESSION['err']['question']['explanation'] = '補足解説は100文字以内で設定してください';
     }
-
 
     if ($validity == FALSE)
     {
@@ -86,39 +93,50 @@
 <!-- FORM -->
     <div class="container my-5">
     <form action="#" method="POST" enctype="multipart/form-data">
+        <!-- title -->
         <div class="form-group row">
-            <!-- 難易度 -->
+                
+            <label for="title" class="col-sm-4 col-form-label">タイトル</label>
+            <div class="col-sm-5">
+                <label for="title" class="col-form-label"><?=$_SESSION['question']['title']?></label>
+            </div>
+        </div>
+        <!-- 難易度 -->
+        <div class="form-group row">
             <label for="difficulty" class="col-sm-4 col-form-label">難易度</label>
             <div class="col-sm-5">
-                <input type="text" readonly <?PHP if($_SESSION['question']['difficty']==1):?>   value="easy"
-                                            <?PHP elseif($_SESSION['question']['difficty']==2):?>   value="normal"
-                                            <?PHP elseif($_SESSION['question']['difficty']==3):?>   value="hard"
-                                            <?PHP endif?>>
+                <?PHP if($_SESSION['question']['difficulty']==1):?>
+                    <label for="difficulty" class="col-form-label">easy</label>
+                <?PHP elseif($_SESSION['question']['difficulty']==2):?>
+                    <label for="difficulty" class="col-form-label">normal</label>
+                <?PHP elseif($_SESSION['question']['difficulty']==3):?>
+                    <label for="difficulty" class="col-form-label">hard</label>
+                <?PHP endif?>
             </div>
-        </div> 
+        </div>
         <!-- 画像の登録 -->
         <div class="form-group row">
             <label for="before" class="col-sm-4 col-form-label">変更前の画像</label>
             <div class="col-sm-6">
-                <input type="text" id="before" value="<?=$_SESSION['question']['before']?>">
+                <label for="before" class="col-form-label"><?=$_FILES['before']['name']?></label>
             </div>
         </div>
         <div class="form-group row">
             <label for="after" class="col-sm-4 col-form-label">変更後の画像</label>
             <div class="col-sm-6">
-                <input type="text" id="after" value="<?=$_SESSION['question']['after']?>">
+                <label for="after" class="col-form-label"><?=$_FILES['after']['name']?></label>
             </div>
         </div>
         <div class="form-group row">
             <label for="answer" class="col-sm-4 col-form-label">答えの画像</label>
             <div class="col-sm-6">
-                <input type="text" id="answer" value="<?=$_SESSION['question']['answer']?>">
+                <label for="answer" class="col-form-label"><?=$_FILES['answer']['name']?></label>
             </div>
         </div>
         <div class="form-group row">
             <label for="explanation" class="col-sm-4 col-form-label">答えの解説</label>
             <div class="col-sm-6">
-                <textarea class="form-control" id="explanation" row="5"><?=$_SESSION['question']['explanation']?></textarea>
+                <label for="explanation" class="col-form-label"><?=$_SESSION['question']['explanation']?></label>
             </div>
         </div>
         <div class="form-group row">
