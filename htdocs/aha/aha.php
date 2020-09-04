@@ -1,3 +1,52 @@
+<?PHP
+    session_start();
+    session_regenerate_id(TRUE);
+  
+    require_once('../common/define.php');
+    require_once('../common/sql_players.php');
+    require_once('../common/sql_compList.php');
+    require_once('../common/sql_questions.php');
+  
+    $question = sanitize($_POST);
+
+    //  解いたというcheckをする
+    if ((isset($_SESSION["signIn"]['is_signIn'])))
+    {
+        try
+        {
+            $comp = new compListModel;
+            $comp -> checkCompQuestion($_SESSION["signIn"]['is_signIn'], $question['id']);
+        } catch (Exception $e)
+        {
+            var_dump($e);
+            exit();
+            header('Local: aha_list.php');
+        }
+    }
+    $comp = null;
+
+    // 問題を取得
+    try
+    {
+        $q = new questionsModel;
+        $AHA = $q->getQuestion($question['id']);
+    } catch (Exception $e)
+    {
+        var_dump($e);
+        exit();
+        header('Local: aha_list.php');
+    }
+    $q = null;
+
+    // imgのパスを作成
+    $dir = "../img/";
+    if ($AHA['difficulty'] == 1) $dir .= 'easy/';
+    elseif ($AHA['difficulty'] == 2) $dir .= 'normal/';
+    elseif ($AHA['difficulty'] == 3) $dir .= 'hard/';
+    else    header('Local: aha_list.php');
+    $dir .= strstr($AHA['before_png'], '_', true) . '/';
+?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -29,19 +78,19 @@
         <div id="countDown-wrapper">
             <div id="countDown"></div>
         </div>
-        <!-- start button -->
-        <div class="btn-wrapper">
-            <button type="button" id="btnStart" class="btn btn-primary">START</button>
-        </div>
         <!-- aha画像 -->
         <div id="img-wrapper">
-            <img id="targetImage" class="before" src="../img/easy/aha1/aha1_before.png" alt="">
-            <img class="after" src="../img/easy/aha1/aha1_after.png" alt="">
-            <img class="answer" src="../img/easy/aha1/aha1_answer.png" alt="">
+            <img id="targetImage" class="before" src="<?= $dir . $AHA['before_png']?>" alt="" height="600" width="980">
+            <img class="after" src="<?= $dir . $AHA['after_png']?>" alt="" height="600" width="980">
+            <img class="answer" src="<?= $dir . $AHA['answer_png']?>" alt="" height="600" width="980">
         </div>
         <!-- progress -->
         <div class="progress" class="container my-3">
             <div id="progressBar" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <!-- start button -->
+        <div class="btn-wrapper">
+            <button type="button" id="btnStart" class="btn btn-primary">START</button>
         </div>
     </div>
     <div class="container">
@@ -50,7 +99,7 @@
                 <a class="nav-link" href="../index.php">TOPページへ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">確認する（答え合わせ）</a>
+                <a class="nav-link" href="aha_answer.php">確認する（答え合わせ）</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">次の問題へ</a>
