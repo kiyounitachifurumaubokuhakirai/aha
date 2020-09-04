@@ -7,8 +7,7 @@
 
   try{
     $question = new questionsModel();
-    $question -> registerQuestion($_SESSION['question']['title'], $_SESSION['question']['difficulty'], 
-        $_SESSION['question']['before'], $_SESSION['question']['after'], $_SESSION['question']['answer'], $_SESSION['question']['explanation']);
+    $question -> registerQuestion($_SESSION['question']['title'], $_SESSION['question']['difficulty'], $_SESSION['question']['explanation']);
   } catch (Exception $e)
   {
     var_dump($e);
