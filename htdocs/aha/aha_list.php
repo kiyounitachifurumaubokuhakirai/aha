@@ -9,7 +9,6 @@
 
     // どの難易度を選択したか
     $diffucilty = sanitize($_POST);
-
     try
     {
         $question = new questionsModel;
@@ -23,13 +22,13 @@
         // case1:signinしている場合　→　解いた問題に「済」をつけ、ソートする
         if ( isset($_SESSION["signIn"]['is_signIn']))
         {
-            $questions = $question->getAllQuestionsForDiccultyInSignin($_SESSION["signIn"]['is_signIn'], $diffucilty);
+            $questions = $question->getAllQuestionsForDifficultyInSignin($_SESSION["signIn"]['is_signIn'], $diffucilty["difficulty"] );
         }
 
         // case2:signinしていない場合　→　単に問題を取得
         else
         {
-            $questions = $question->getAllQuestionsForDicculty($diffucilty);
+            $questions = $question->getAllQuestionsForDifficulty($diffucilty["difficulty"] );
         }
     } catch (Exception $e)
     {
@@ -37,8 +36,6 @@
         exit();
         header('Location: ../index.php');
     }
-
-    
 
     /** playerがsigninしている場合
      * playerが解いた問題に「済」をつける
@@ -96,7 +93,7 @@
                     </td>
                     <td>
                         <form action="aha.php" method="post">
-                            <input type="hidden" name="ID" value="<?= $question['ID']?>">
+                            <input type="hidden" name="id" value="<?= $question['id']?>">
                             <input type="hidden" name="name" value="<?=$question['title']?>">
                             <input type="submit" value="挑戦">
                         </form>
