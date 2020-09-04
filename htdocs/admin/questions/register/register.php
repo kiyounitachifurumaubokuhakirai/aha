@@ -1,6 +1,18 @@
 <?PHP
-  session_start();
-  session_regenerate_id(TRUE);
+    session_start();
+    session_regenerate_id(TRUE);
+
+    /** 残骸ファイルがあれば、削除する
+     * 対象ディレクトリ：../../../img/temp/
+     * 対象ファイル：.png
+     */
+    $filename = "../../../img/temp/*.png";
+    foreach (glob($filename) as $file)
+    {
+        // 削除
+        unlink($file);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +86,7 @@
             <label for="before" class="col-sm-4 col-form-label">変更前の画像 <span class="badge badge-warning">画像サイズ：980×600 pngファイル</span></label>
             <div class="col-sm-6">
                 <?PHP if(isset($_SESSION['err']['question']['before']) && $_SESSION['err']['question']['before']):?>
-                    <input type="file" class="form-control is-invalid" id="before" name="before" aria-describedby="beforeFeedback" >
+                    <input type="file" class="form-control is-invalid" id="before" name="before" aria-describedby="beforeFeedback" require>
                     <div id="beforeFeedback" class="invalid-feedback">
                         <?=$_SESSION['err']['question']['before']?>
                     </div>
@@ -92,7 +104,7 @@
                         <?=$_SESSION['err']['question']['after']?>
                     </div>
                 <?PHP else:?>
-                    <input type="file" class="form-control-file" id="before" name="before">
+                    <input type="file" class="form-control-file" id="after" name="after" aria-describedby="afterFeedback">
                 <?PHP endif?>
             </div>
         </div>
@@ -105,7 +117,7 @@
                         <?=$_SESSION['err']['question']['answer']?>
                     </div>
                 <?PHP else:?>
-                    <input type="file" class="form-control-file" id="before" name="before">
+                    <input type="file" class="form-control-file" id="answer" name="answer" aria-describedby="answerFeedback" value="<?=$_FILES['answer']?>">
                 <?PHP endif?>
             </div>
         </div>
