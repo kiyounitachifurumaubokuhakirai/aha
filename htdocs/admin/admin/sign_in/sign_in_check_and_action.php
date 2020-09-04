@@ -1,6 +1,8 @@
 <?php
+  // セッションをスタートする。
   session_start();
-  session_regenerate_id(TRUE);
+  // セッションIDをリクエストのたびに更新する。
+  session_regenerate_id();
 
   require_once('../../../common/define.php');
   require_once('../../../common/sql_admin.php');

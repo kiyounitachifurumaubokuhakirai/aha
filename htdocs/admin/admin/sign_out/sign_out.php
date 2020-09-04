@@ -1,6 +1,8 @@
 <?PHP
-  session_start();
-  session_regenerate_id(TRUE);
+    // セッションをスタートする。
+    session_start();
+    // セッションIDをリクエストのたびに更新する。
+    session_regenerate_id();
 ?>
 
 <!DOCTYPE html>

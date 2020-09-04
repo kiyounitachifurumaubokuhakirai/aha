@@ -1,7 +1,9 @@
 <?php
 
-if (!isset($_SESSION)) session_start();
-session_regenerate_id(TRUE);
+  // セッションをスタートする。
+  session_start();
+  // セッションIDをリクエストのたびに更新する。
+  session_regenerate_id();
 
 //セッション変数を全て解除
 $_SESSION = [];
