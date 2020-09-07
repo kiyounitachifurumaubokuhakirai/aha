@@ -83,3 +83,16 @@
 	display: block;
 	clear: both;
 }
+
+
+
+IMG.displayedAnswerIMG {
+	display: block;
+	margin: 0 auto;
+}
+
+
+p.explanation {
+	display: block;
+	margin: 0 auto;
+}
