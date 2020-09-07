@@ -133,18 +133,28 @@ $(function() {
                 openingAHA(function() {
                     startAHA();
                     controlPer(function() {
-                        if (playCount===1) {
+                        // if (playCount===1) {
                             displayRetry();
-                        } else if (playCount===2) {
-                            displayAnswer();
-                        }
+                            $('#btnStart').hide();
+                        // } else if (playCount===2) {
+                        //     displayAnswer();
+                        // }
                     });
                 });
             });
-        } else {
-            $('#btnStart').prop('disabled', true);
+        // } else {
+        //     $('#btnStart').hide();
         };
     });
+
+
+
+    $('#retry').click(function()
+    {
+        location.reload();
+    });
+    
+    
 
 });
 
