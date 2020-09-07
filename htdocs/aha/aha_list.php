@@ -7,8 +7,12 @@
     require_once('../common/sql_questions.php');
     require_once('../common/sql_compList.php');
 
+    if(isset($_SESSION['question']))    unset($_SESSION['question']);
+
     // どの難易度を選択したか
     $diffucilty = sanitize($_POST);
+    if (!empty($diffucilty))    $_SESSION['diffucilty'] = $diffucilty["difficulty"];
+
     try
     {
         $question = new questionsModel;
@@ -28,7 +32,7 @@
         // case2:signinしていない場合　→　単に問題を取得
         else
         {
-            $questions = $question->getAllQuestionsForDifficulty($diffucilty["difficulty"] );
+            $questions = $question->getAllQuestionsForDifficulty($_SESSION['diffucilty'] );
         }
     } catch (Exception $e)
     {
