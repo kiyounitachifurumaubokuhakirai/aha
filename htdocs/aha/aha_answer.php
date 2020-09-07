@@ -28,7 +28,7 @@
     try
     {
         $q = new questionsModel;
-        $AHA = $q->getQuestion($_SESSION['question']['id']);
+        $AHA = $q->getAnswer($_SESSION['question']['id']);
     } catch (Exception $e)
     {
         var_dump($e);
@@ -37,9 +37,6 @@
     }
     $q = null;
 
-    $dir = $_SESSION['question']['dir'] ;
-
-    unset($_SESSION['question']['dir']);
 ?>
 
 
@@ -74,7 +71,7 @@
         </ul>
     </div>
     <div class="container my-5">
-        <img class="displayedAnswerIMG" src="<?= $dir . $AHA['answer_png']?>" alt="" height="600" width="980">
+        <img class="displayedAnswerIMG" src="<?= $_SESSION['question']['dir'] . $AHA['answer_png']?>" alt="" height="600" width="980">
     </div>
     <?PHP if(isset($AHA['explanation']) && $AHA['explanation']!=""): ?>
         <div class="container my-5">
