@@ -191,7 +191,7 @@
      * @return  array
      */
     public function getQuestion($question_id) {
-      $sql = 'SELECT id, title, difficulty, before_png, after_png, answer_png, explanation FROM questions_list WHERE id=?';
+      $sql = 'SELECT id, title, difficulty, before_png, after_png FROM questions_list WHERE id=?';
       $stmt = $this->dbh->prepare($sql);
       $data = [];
       $data[] = $question_id;
@@ -200,6 +200,22 @@
       return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+
+
+
+     /** 答えと解説を取得
+     * @param array question_id
+     * @return  array
+     */
+    public function getAnswer($question_id) {
+      $sql = 'SELECT answer_png, explanation FROM questions_list WHERE id=?';
+      $stmt = $this->dbh->prepare($sql);
+      $data = [];
+      $data[] = $question_id;
+      $stmt->execute($data);
+
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
 
     /** 問題を削除
