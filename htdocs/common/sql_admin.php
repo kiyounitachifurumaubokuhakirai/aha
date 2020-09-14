@@ -27,25 +27,25 @@
      */
     public function isAdmin ($admin_name, $hash_pass) : bool
     {
-      $sql = 'SELECT ID FROM admin WHERE is_deleted=0 AND (admin=? OR password=?)';
-      $stmt = $this->dbh->prepare($sql);
-      $data = [];
-      $data = $admin_name;
-      $data = $hash_pass;
+        $sql = 'SELECT ID FROM admin WHERE is_deleted=0 AND (admin=? OR password=?)';
+        $stmt = $this->dbh->prepare($sql);
+        $data = [];
+        $data = $admin_name;
+        $data = $hash_pass;
 
-      while (TRUE)
-      {
-        $rec = [];
-        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($rec == FALSE) break;
-        else
+        while (TRUE)
         {
-          unset ($_SESSION['err']['isAdmin']);
-          $_SESSION['err']["signUp"]['accident'] = "既に使用されています";
-          return true;
+            $rec = [];
+            $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($rec == FALSE) break;
+            else
+            {
+                unset ($_SESSION['err']['isAdmin']);
+                $_SESSION['err']["signUp"]['accident'] = "既に使用されています";
+                return true;
+            }
         }
-      }
-      return false;
+        return false;
     }
 
 

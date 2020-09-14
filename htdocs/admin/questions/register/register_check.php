@@ -55,7 +55,7 @@
     {
         $validity = FALSE;
         $_SESSION['err']['question']['explanation'] = '空白文字は使えません';
-    } elseif(strlen($_SESSION['question']['explanation']) > 100)
+    } elseif (strlen($_SESSION['question']['explanation']) > 100)
     {
         $validity = FALSE;
         $_SESSION['err']['question']['explanation'] = '補足解説は100文字以内で設定してください';

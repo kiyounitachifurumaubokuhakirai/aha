@@ -9,14 +9,11 @@
   
 
     //  解いたというcheckをする
-    if ((isset($_SESSION["signIn"]['is_signIn'])))
-    {
-        try
-        {
+    if ((isset($_SESSION["signIn"]['is_signIn']))) {
+        try {
             $comp = new compListModel;
             $comp -> checkCompQuestion($_SESSION["signIn"]['is_signIn'], $_SESSION['question']['ID']);
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             var_dump($e);
             exit();
             header('Local: aha_list.php');
@@ -25,12 +22,10 @@
     $comp = null;
 
     // 問題を取得
-    try
-    {
+    try {
         $q = new questionsModel;
         $AHA = $q->getAnswer($_SESSION['question']['id']);
-    } catch (Exception $e)
-    {
+    } catch (Exception $e) {
         var_dump($e);
         exit();
         header('Local: aha_list.php');
@@ -73,7 +68,7 @@
     <div class="container my-5">
         <img class="displayedAnswerIMG" src="<?= $_SESSION['question']['dir'] . $AHA['answer_png']?>" alt="" height="600" width="980">
     </div>
-    <?PHP if(isset($AHA['explanation']) && $AHA['explanation']!=""): ?>
+    <?PHP if (isset($AHA['explanation']) && $AHA['explanation']!=""): ?>
         <div class="container my-5">
             <p class="explanation"><?=$AHA['explanation']?></p>
         </div>

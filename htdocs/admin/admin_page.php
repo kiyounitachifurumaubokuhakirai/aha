@@ -20,7 +20,7 @@
   <!-- jumbotron -->
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <?PHP if( isset($_SESSION['admin']["signIn"]['is_signIn']) ):?>
+      <?PHP if ( isset($_SESSION['admin']["signIn"]['is_signIn']) ) : ?>
         <h2 class="display-5">ようこそ！ <?= $_SESSION['admin']["signIn"]['name'] ?>さん</h2>
         <p class="lead">このページでは、AHAの管理を行います</p>
       <?PHP else:?>

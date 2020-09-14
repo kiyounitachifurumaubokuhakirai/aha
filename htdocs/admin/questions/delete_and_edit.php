@@ -9,13 +9,11 @@
   if (isset($_SESSION['err']))  unset($_SESSION['err']);
   if (isset($_SESSION['signUp']))  unset($_SESSION['signUp']);
 
-  try
-  {
+  try {
     $question = new questionsModel();
     $questions = [];
     $questions = $question -> getAllQuestions();
-  } catch (Exception $e)
-  {
+  } catch (Exception $e) {
     var_dump($e);
     exit();
     header('Location: ../../index.php');
@@ -69,7 +67,7 @@
             </thead>
 
             <?php $i=1?>
-            <?php foreach($questions as $question):?>
+            <?php foreach ($questions as $question):?>
                 <tr>
                     <td class="align-center">
                         <?= $i?>

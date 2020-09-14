@@ -7,7 +7,7 @@
      * コンストラクタ
      */
     public function __construct() {
-      parent::__construct();    //親クラスのコンストラクタを呼び出す
+        parent::__construct();    //親クラスのコンストラクタを呼び出す
     }
 
 
@@ -27,14 +27,14 @@
      */
     public function checkCompQuestion ($player_ID, $questions_ID)
     {
-      $sql = 'INSERT INTO comp_questions_list player_ID, questions_ID VALUES(?, ?)';
-      $stmt = $this->dbh->prepare($sql);
-      $data = [];
-      $data = $player_ID;
-      $data = $questions_ID;
+        $sql = 'INSERT INTO comp_questions_list player_ID, questions_ID VALUES(?, ?)';
+        $stmt = $this->dbh->prepare($sql);
+        $data = [];
+        $data = $player_ID;
+        $data = $questions_ID;
 
-      $stmt->execute($data);
-    }
+        $stmt->execute($data);
+      }
 
 
 

@@ -11,12 +11,10 @@
     if (!empty($question))    $_SESSION['question'] = $question;
 
     // 問題を取得
-    try
-    {
+    try {
         $q = new questionsModel;
         $AHA = $q->getQuestion($_SESSION['question']['id']);
-    } catch (Exception $e)
-    {
+    } catch (Exception $e) {
         var_dump($e);
         exit();
         header('Local: aha_list.php');

@@ -13,8 +13,7 @@
     $diffucilty = sanitize($_POST);
     if (!empty($diffucilty))    $_SESSION['diffucilty'] = $diffucilty["difficulty"];
 
-    try
-    {
+    try {
         $question = new questionsModel;
         $questions = [];
 
@@ -24,18 +23,15 @@
          */
         
         // case1:signinしている場合　→　解いた問題に「済」をつけ、ソートする
-        if ( isset($_SESSION["signIn"]['is_signIn']))
-        {
+        if ( isset($_SESSION["signIn"]['is_signIn'])) {
             $questions = $question->getAllQuestionsForDifficultyInSignin($_SESSION["signIn"]['is_signIn'], $diffucilty["difficulty"] );
         }
 
         // case2:signinしていない場合　→　単に問題を取得
-        else
-        {
+        else {
             $questions = $question->getAllQuestionsForDifficulty($_SESSION['diffucilty'] );
         }
-    } catch (Exception $e)
-    {
+    } catch (Exception $e) {
         var_dump($e);
         exit();
         header('Location: ../index.php');

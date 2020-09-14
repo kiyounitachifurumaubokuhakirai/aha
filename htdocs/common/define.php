@@ -16,7 +16,8 @@
      * @param array $before サニタイズしたいデータ
      * 返り値   ：  サニタイズ完了したデータ
      */
-    function sanitize($before){
+    function sanitize($before)
+    {
         $after=[];
         foreach($before as $key => $value){
         $after[$key]=htmlspecialchars($value, ENT_QUOTES, 'UTF-8');

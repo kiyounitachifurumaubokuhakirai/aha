@@ -5,11 +5,10 @@
   require_once('../../../common/define.php');
   require_once('../../../common/sql_questions.php');
 
-  try{
+  try {
     $question = new questionsModel();
     $question -> registerQuestion($_SESSION['question']['title'], $_SESSION['question']['difficulty'], $_SESSION['question']['explanation']);
-  } catch (Exception $e)
-  {
+  } catch (Exception $e) {
     var_dump($e);
     exit();
     header('Location: ../../index.php');
